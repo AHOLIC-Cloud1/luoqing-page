@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>✦ 致 罗沁 ✦</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <style>html{background:#081518}</style>
   <style>
     /* ================= 全局 ================= */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,7 +15,9 @@
       --gold:#f5e6a3; --gold-glow:rgba(245,230,163,.2);
       --pink:#e8a0b4; --pink-glow:rgba(232,160,180,.15);
       --t1:#e8f0f0; --t2:#b0cdc5; --t3:#6fa89b;
-      --serif:'Noto Serif SC',serif; --sans:'Quicksand',sans-serif; --hand:'Ma Shan Zheng',cursive;
+      --serif:'Noto Serif SC','Source Han Serif SC','PingFang SC','Microsoft YaHei',serif;
+      --sans:'Quicksand','PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif;
+      --hand:'Kaiti SC','STKaiti','KaiTi','楷体',cursive;
       --r:20px; --rs:12px;
     }
     body { font-family:var(--serif); background:var(--bg-deep); color:var(--t1); overflow-x:hidden; line-height:1.8; -webkit-font-smoothing:antialiased; }
@@ -658,24 +659,24 @@
       restart();
     })();
 
-    /* ========== 风琴音效 (WebAudio) ========== */
+    /* ========== 风琴音效 (WebAudio, 带容错) ========== */
     let actx=null,master=null,bgmOn=false,bgmTimer=null;
-    function audio(){if(!actx){actx=new (window.AudioContext||window.webkitAudioContext)();master=actx.createGain();master.gain.value=.5;master.connect(actx.destination)}if(actx.state==='suspended')actx.resume();return actx}
+    function audio(){try{if(!actx){actx=new (window.AudioContext||window.webkitAudioContext)();master=actx.createGain();master.gain.value=.5;master.connect(actx.destination)}if(actx&&actx.state==='suspended')actx.resume()}catch(e){}return actx}
     const NOTES={C5:523.25,D5:587.33,E5:659.25,G5:783.99,A5:880,B5:987.77,C6:1046.5,D6:1174.66,E6:1318.5};
-    function pluck(freq,time,dur,g=1,type='triangle'){
-      const a=audio(),o=a.createOscillator(),gN=a.createGain();
-      o.type=type;o.frequency.value=freq;
-      const v=gN.gain;v.setValueAtTime(0,time);v.linearRampToValueAtTime(g*.8,time+.01);v.exponentialRampToValueAtTime(.0001,time+dur);
-      o.connect(gN);gN.connect(master);o.start(time);o.stop(time+dur+.05)}
+    function pluck(freq,time,dur,g,type){
+      try{const a=audio();if(!a)return;const o=a.createOscillator(),gN=a.createGain();
+      o.type=type||'triangle';o.frequency.value=freq;
+      const v=gN.gain;v.setValueAtTime(0,time);v.linearRampToValueAtTime((g||1)*.8,time+.01);v.exponentialRampToValueAtTime(.0001,time+dur);
+      o.connect(gN);gN.connect(master);o.start(time);o.stop(time+dur+.05)}catch(e){}}
     // 微风之歌：C 大调五声音阶的温柔琶音（原创）
     const ARP=[NOTES.C5,NOTES.E5,NOTES.G5,NOTES.A5,NOTES.G5,NOTES.E5,NOTES.D5,NOTES.E5,
                NOTES.C5,NOTES.G5,NOTES.A5,NOTES.C6,NOTES.A5,NOTES.G5,NOTES.E5,NOTES.D5];
     function playBgm(){
-      const a=audio(),t0=a.currentTime+.05;
+      const a=audio();if(!a)return;const t0=a.currentTime+.05;
       ARP.forEach((f,i)=>pluck(f,t0+i*.42,.9,1,Math.random()>.5?'triangle':'sine'));
     }
     const btn=document.getElementById('music-btn');
-    function playOneShot(){const a=audio();const seq=[NOTES.C5,NOTES.E5,NOTES.G5,NOTES.C6];
+    function playOneShot(){const a=audio();if(!a)return;const seq=[NOTES.C5,NOTES.E5,NOTES.G5,NOTES.C6];
       seq.forEach((f,i)=>pluck(f,a.currentTime+i*.09,.5,.7))}
     btn.addEventListener('click',()=>{
       if(!bgmOn){audio();bgmOn=true;btn.classList.add('on');btn.textContent='⏸';playBgm();
@@ -716,8 +717,14 @@
     (function(){document.addEventListener('click',e=>{const r=document.createElement('div');r.className='ripple';
       r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.appendChild(r);setTimeout(()=>r.remove(),1000)})})();
 
-    /* ========== 加载完成 ========== */
-    addEventListener('load',()=>setTimeout(()=>document.getElementById('loadingMask').classList.add('hidden'),500));
+    /* ========== 加载完成（含兜底，任何情况都不会卡在加载页） ========== */
+    (function(){
+      var mask=document.getElementById('loadingMask');
+      function hide(){mask.classList.add('hidden')}
+      if(document.readyState==='complete'){setTimeout(hide,200);return}
+      addEventListener('load',hide,{once:true});
+      setTimeout(hide,2500); // 兜底：最多 2.5 秒必须显示页面
+    })();
   </script>
 </body>
 </html>
