@@ -701,7 +701,11 @@
     })();
 
     /* ========== 明信片翻面 ========== */
-    (function(){document.querySelectorAll('.flip-card').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('flip'))})();
+    (function(){
+      document.querySelectorAll('.flip-card').forEach(function(c){
+        c.addEventListener('click', function(){ c.classList.toggle('flip'); });
+      });
+    })();
 
     /* ========== 许愿瓶 ========== */
     (function(){
