@@ -305,6 +305,11 @@
     <div class="spinner"></div>
     <div class="load-text">风 起 之 时</div>
   </div>
+  <!-- 保险丝：无论后续脚本是否报错/资源是否卡住，加载页必定在 1.8 秒内消失 -->
+  <script>
+    setTimeout(function(){ document.getElementById('loadingMask').classList.add('hidden'); }, 1800);
+  </script>
+  <noscript><style>#loadingMask{display:none!important}</style></noscript>
 
   <div id="scroll-progress"></div>
   <button id="music-btn" title="风之琴音">🎻</button>
