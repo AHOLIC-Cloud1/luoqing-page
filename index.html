@@ -195,6 +195,19 @@
     .hero-rec .hr-name{font-size:.95rem;color:var(--gold);font-weight:600;margin-bottom:4px}
     .hero-rec .hr-role{font-size:.72rem;color:var(--t3);font-family:var(--sans);margin-bottom:6px}
     .hero-rec .hr-reason{font-size:.78rem;color:var(--t2);font-weight:300;line-height:1.5}
+    .hero-tip{margin-top:8px;font-size:.68rem;color:var(--t3);font-family:var(--sans);letter-spacing:.05em;border-top:1px dashed rgba(95,193,176,.12);padding-top:6px}
+    .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:32px}
+    .skill-card{background:linear-gradient(150deg,rgba(22,52,48,.75),rgba(10,28,30,.85));border:1px solid rgba(95,193,176,.12);border-radius:var(--rs);padding:22px 18px;text-align:center;transition:all .35s ease;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .skill-card.reveal{opacity:1;transform:translateY(0)}
+    .skill-card:hover{background:rgba(22,52,48,.9);border-color:rgba(95,193,176,.3);transform:translateY(-4px);box-shadow:0 12px 40px rgba(95,193,176,.08)}
+    .skill-card .sk-icon{font-size:2rem;display:block;margin-bottom:8px;filter:drop-shadow(0 0 12px rgba(95,193,176,.2))}
+    .skill-card .sk-name{font-size:.95rem;color:var(--gold);font-weight:600;margin-bottom:4px}
+    .skill-card .sk-type{font-size:.68rem;color:var(--t3);font-family:var(--sans);margin-bottom:6px;letter-spacing:.08em}
+    .skill-card .sk-desc{font-size:.8rem;color:var(--t2);font-weight:300;line-height:1.7}
+    .lore-box{margin-top:28px;padding:28px 24px;background:linear-gradient(160deg,rgba(20,46,44,.8),rgba(10,26,28,.9));border:1px solid rgba(95,193,176,.1);border-radius:var(--r);opacity:0;transform:translateY(20px);transition:opacity .8s ease .2s,transform .8s ease .2s}
+    .lore-box.reveal{opacity:1;transform:translateY(0)}
+    .lore-box .lore-title{font-size:.9rem;color:var(--gold);font-weight:600;margin-bottom:10px;letter-spacing:.1em;text-align:center}
+    .lore-box .lore-text{font-size:.85rem;color:var(--t2);line-height:2;font-weight:300;text-align:justify}
     #message{background:radial-gradient(ellipse at 50% 50%,rgba(245,230,163,.04) 0%,transparent 60%)}
     .letter{position:relative;max-width:680px;margin:38px auto 0;padding:42px 36px;background:linear-gradient(170deg,rgba(28,38,32,.92),rgba(14,26,26,.96));border:1px solid rgba(95,193,176,.12);border-radius:var(--r);opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;overflow:hidden}
     .letter.reveal{opacity:1;transform:translateY(0)}
@@ -326,6 +339,8 @@
             <div class="quote-item"><span class="q-mark">❝</span><span class="q-text">只要风还在吹，我们就一定能再见面。</span></div>
             <div class="quote-item"><span class="q-mark">❝</span><span class="q-text">旅行者，这一路上，感谢与你同行。</span></div>
             <div class="quote-item"><span class="q-mark">❝</span><span class="q-text">向着星辰与深渊，自由之翼终将带你飞向想去的地方。</span></div>
+            <div class="quote-item"><span class="q-mark">❝</span><span class="q-text">唱一首歌吧，让风把它带到远方——总有人会听见的。</span></div>
+            <div class="quote-item"><span class="q-mark">❝</span><span class="q-text">风会记住每一个旅行者的名字，也会记住你。</span></div>
           </div>
         </div>
         <div class="constellation">
@@ -338,6 +353,22 @@
         <span class="tag-item" data-reveal data-delay="200">🏹 天空之翼</span><span class="tag-item" data-reveal data-delay="250">🍃 蒲公英</span><span class="tag-item" data-reveal data-delay="300">🎶 高天之歌</span><span class="tag-item" data-reveal data-delay="350">🌙 风花节</span>
         <span class="tag-item" data-reveal data-delay="400">💚 风神眷顾</span><span class="tag-item" data-reveal data-delay="450">⛰️ 蒙德城</span><span class="tag-item" data-reveal data-delay="500">🎻 弹唱诗人</span><span class="tag-item" data-reveal data-delay="550">🌟 歌仙座</span>
         <span class="tag-item" data-reveal data-delay="600">🌪️ 风神之诗</span><span class="tag-item" data-reveal data-delay="650">🏰 西风大教堂</span>
+      </div>
+
+      <!-- 技能展示 -->
+      <div class="skill-grid">
+        <div class="skill-card" data-reveal data-delay="0"><span class="sk-icon">🌪️</span><div class="sk-name">高天之歌</div><div class="sk-type">元素战技 · 点按/长按</div><div class="sk-desc">在指尖唤出风之漩涡，击飞敌人并造成风元素伤害。长按能生成持续的风场，带着你飞向高处——自由，就是想去哪就去哪。</div></div>
+        <div class="skill-card" data-reveal data-delay="100"><span class="sk-icon">🎶</span><div class="sk-name">风神之诗</div><div class="sk-type">元素爆发 · 60 能量</div><div class="sk-desc">弹奏一曲自由的诗歌，在战场上唤出巨大的龙卷风，牵引敌人并持续造成风元素伤害。接触其他元素后还会转化，就像风会带来远方的气息一样。</div></div>
+        <div class="skill-card" data-reveal data-delay="200"><span class="sk-icon">🍃</span><div class="sk-name">驰风骋野</div><div class="sk-type">天赋 · 滑翔减耗</div><div class="sk-desc">在蒙德城，每一位风神信徒都知道——温迪的庇佑让滑翔消耗降低 20%。风啊，托起每一个向往天空的灵魂吧。</div></div>
+        <div class="skill-card" data-reveal data-delay="300"><span class="sk-icon">🎵</span><div class="sk-name">诗人的琴音</div><div class="sk-type">被动 · 闲游</div><div class="sk-desc">温迪的普通攻击以六连射的琴音为箭，弦音所至，风随其后。他总说：「战斗和弹琴一样，需要节奏和自由的心。」</div></div>
+      </div>
+
+      <!-- 背景故事 -->
+      <div class="lore-box" data-reveal>
+        <div class="lore-title">✦ 风神巴巴托斯 · 温迪的故事 ✦</div>
+        <div class="lore-text">在千年之前的魔神战争中，一缕初生的风打败了旧世界的神，成为了蒙德的守护神——巴巴托斯。但他不愿像其他神明一样高居庙堂，而是化作一位绿衣少年的模样，隐于蒙德城中，以「温迪」之名弹琴唱歌、饮酒作诗。<br><br>
+        他帮助蒙德人推翻了旧贵族的统治，教会了人们自由的含义。然后他放下权柄，让蒙德成为了一个「没有神的神国」——因为真正的自由，不是神明赐予的，而是每个人心中生发的。<br><br>
+        如今，他依然在蒙德的街头巷尾，坐在风起地的树下，轻轻拨动琴弦。如果你路过蒙德，也许能听到他的歌声——那是关于自由、关于风、关于远方的诗。</div>
       </div>
     </div>
   </section>
@@ -409,6 +440,12 @@
         <div class="hero-rec" data-reveal data-delay="400"><span class="hr-icon">🦌</span><div class="hr-name">瑶</div><div class="hr-role">辅助</div><div class="hr-reason">可可爱爱，附身队友就像风神护佑一样。时之祈愿皮肤梦幻十足，峡谷里最治愈的存在</div></div>
         <div class="hero-rec" data-reveal data-delay="500"><span class="hr-icon">💜</span><div class="hr-name">貂蝉</div><div class="hr-role">法师 · 中路</div><div class="hr-reason">灵动飘逸，舞步如风，操作上限极高。仲夏夜之梦的星空特效，就像温迪的星空一样浪漫</div></div>
       </div>
+      <div class="wind-poem" data-reveal style="font-size:.85rem;margin-top:28px;opacity:1;transform:none;transition:none">
+        <p style="color:var(--t3)">你偏爱 <em>辅助</em> 和 <em>中路</em>，是峡谷里最温柔又最致命的存在——<br>
+        辅助是你保护队友的方式，中路是你掌控节奏的舞台。<br>
+        从 <em>西施</em> 的精妙控制到 <em>大乔</em> 的全局运筹，从 <em>小乔</em> 的一扇定乾坤到 <em>瑶</em> 的暖心守护，<br>
+        每一个英雄都像你的一面：<em>温柔、聪明、可靠、又闪闪发光</em> 🌟</p>
+      </div>
     </div>
   </section>
 
@@ -430,6 +467,8 @@
         <div class="uni-line" data-reveal data-delay="320"><span class="dot"></span><span class="text"><strong>🌇 湘江边</strong> — 晚风和橘子洲头的灯，都看过你的笑脸</span></div>
         <div class="uni-line" data-reveal data-delay="400"><span class="dot"></span><span class="text"><strong>🎓 毕业季</strong> — 从 <strong>湖南师大</strong> 出发，走向更远的世界</span></div>
         <div class="uni-line" data-reveal data-delay="480"><span class="dot"></span><span class="text"><strong>🏛️ 岳王亭</strong> — 师大的老地标，见证了多少来去匆匆的故事</span></div>
+        <div class="uni-line" data-reveal data-delay="560"><span class="dot"></span><span class="text"><strong>🏪 麓山南路</strong> — 从师大南院到天马学生公寓，一路的小吃和奶茶店，都是青春的甜味</span></div>
+        <div class="uni-line" data-reveal data-delay="640"><span class="dot"></span><span class="text"><strong>🍲 后街</strong> — 师大后街的麻辣烫、烤串、臭豆腐，那些年一起吃过的「垃圾食品」最香了</span></div>
       </div>
       <div class="uni-quote" data-reveal>"从 <strong>湖南师大</strong> 走出来的你，<br>带着湘江的灵气与麓山的沉稳，<br>到哪里都 <strong>闪闪发光</strong>。"</div>
     </div>
